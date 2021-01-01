@@ -23,7 +23,7 @@
 - everything below is the default
 
 
-``` json
+``` bash
 curl -X "POST" "http://192.168.1.138/rest/api/v1/settings" \
      -H 'Content-Type: application/json; charset=utf-8' \
      -d $'{
