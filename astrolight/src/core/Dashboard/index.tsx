@@ -47,20 +47,19 @@ const swatches: Swatch[] = [
 interface Colour {
   main: {
     dyn: {
-      r: boolean,
-      b: boolean,
-      g: boolean,
+      r: boolean
+      b: boolean
+      g: boolean
       w: boolean
-    },
+    }
     stat: {
-      r: number,
-      b: number,
-      g: number,
+      r: number
+      b: number
+      g: number
       w: number
     }
   }
 }
-
 
 const colour: Colour = {
   main: {
@@ -79,16 +78,14 @@ const colour: Colour = {
   }
 }
 
-
-
 const Dashboard = () => {
   const [error, setError] = useState<boolean>(false)
 
-  useEffect(() => {
-    apiReq(ASTRO_URL, 'POST')
-      .then((data) => console.warn(data.status))
-      .catch((error) => setError(true))
-  })
+  // useEffect(() => {
+  //   apiReq(ASTRO_URL, 'POST')
+  //     .then((data) => console.warn(data.status))
+  //     .catch((error) => setError(true))
+  // })
 
   const onRefresh = () => {
     apiReq(ASTRO_URL, 'POST')
@@ -110,14 +107,13 @@ const Dashboard = () => {
 
   const adjustBrightness = (value: number) => {
     const brightness = Math.round(value)
-
-    apiReq(ASTRO_URL, 'POST', { brightness })
+    apiReq(ASTRO_URL, 'POST', { effect: 'noise', brightness })
       .then((data) => console.warn(data.status))
       .catch((error) => console.warn(error))
   }
 
   const changeColor = () => {
-    apiReq(ASTRO_URL, 'POST', { colour })
+    apiReq(ASTRO_URL, 'POST', { effect: 'noise', colour })
       .then((data) => console.warn(data.status))
       .catch((error) => console.warn(error))
   }
@@ -131,9 +127,6 @@ const Dashboard = () => {
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
         <Text style={styles.headline}>Astro Light</Text>
-        {error && (
-          <Text style={styles.headline}>Can't connect to the astro light!</Text>
-        )}
         <Pressable
           style={[styles.button, styles.buttonOn]}
           onPress={lightOn}
@@ -192,7 +185,7 @@ const Dashboard = () => {
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: '#fff',
-    height: '100%',
+    minHeight: '100%',
     paddingHorizontal: 16,
     paddingVertical: 28
   },
@@ -250,6 +243,27 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between'
   }
+  // toastContainer: {
+  //   backgroundColor: 'rgba(255, 105, 101, 1.00)',
+  //   paddingVertical: 12,
+  //   paddingHorizontal: 20,
+  //   borderRadius: 8,
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   position: 'absolute',
+  //   width: '100%',
+  //   bottom: 0,
+  //   zIndex: 1,
+  // },
+  // toast: {
+  //   color: '#fff',
+  //   fontSize: 16,
+  // },
+  // toastClose: {
+  //   color: '#fff',
+  //   fontSize: 16,
+  //   fontWeight: 'bold',
+  // }
 })
 
 export default Dashboard
