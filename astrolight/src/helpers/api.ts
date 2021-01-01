@@ -16,6 +16,5 @@ export const apiReq = async (
     },
     body: JSON.stringify(data) // body data type must match "Content-Type" header
   })
-  console.warn(response)
-  return response.json()
+  return response // already returns json, so no need for response.json()
 }
