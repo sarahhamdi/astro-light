@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Pressable, Text } from 'react-native'
 
-import { colors } from '../../helpers/styles'
+import { colors, theme } from '../../helpers/styles'
 
 interface Props {
   onPress: () => void
@@ -23,7 +23,7 @@ const Button = ({ type = 'primary', onPress, text }: Props) => {
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    borderRadius: 30,
+    borderRadius: theme.borderRadius,
     marginTop: 16,
     paddingHorizontal: 24,
     paddingVertical: 16

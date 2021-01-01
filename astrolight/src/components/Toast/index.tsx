@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { theme } from '../../helpers/styles'
 
 const copy = {
   toast: {
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 105, 101, 1.00)',
     paddingVertical: 16,
     paddingHorizontal: 20,
-    borderRadius: 30,
+    borderRadius: theme.borderRadius,
     position: 'absolute',
     bottom: 20,
     right: 0,

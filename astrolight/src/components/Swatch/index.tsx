@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Pressable } from 'react-native'
 
-import { colors } from '../../helpers/styles'
+import { colors, theme } from '../../helpers/styles'
 
 interface Props {
   backgroundColor?: string
@@ -33,7 +33,7 @@ const Swatch = ({
 
 const styles = StyleSheet.create({
   swatch: {
-    borderRadius: 16,
+    borderRadius: theme.borderRadiusSmall,
     height: 90,
     marginVertical: 4,
     width: '23%',
