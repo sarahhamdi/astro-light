@@ -3,7 +3,6 @@ import {
   StyleSheet,
   ScrollView,
   View,
-  Pressable,
   Text,
   Switch,
   RefreshControl
@@ -13,32 +12,32 @@ import Slider from '@react-native-community/slider'
 import { apiReq, ASTRO_URL } from '../../helpers/api'
 import { colors } from '../../helpers/styles'
 import Button from '../../components/Button'
-
-interface Swatch {
+import Swatch from '../../components/Swatch'
+interface SwatchType {
   color: string
 }
 
-const swatches: Swatch[] = [
+const swatches: SwatchType[] = [
   {
-    color: colors.brand
+    color: 'rgb(255, 105, 101)'
   },
   {
-    color: colors.brand
+    color: 'rgb(81, 81, 81)'
   },
   {
-    color: colors.brand
+    color: 'rgb(255, 196, 56)'
   },
   {
-    color: colors.brand
+    color: 'rgb(153, 205, 54)'
   },
   {
-    color: colors.brand
+    color: 'rgb(247, 138, 224)'
   },
   {
-    color: colors.brand
+    color: 'rgb(216, 223, 215)'
   },
   {
-    color: colors.brand
+    color: 'rgb(101, 226, 255)'
   },
   {
     color: colors.brand
@@ -80,10 +79,18 @@ const colour: Colour = {
   }
 }
 
+const copy = {
+  dashboard: {
+    buttonOn: 'Turn me on!',
+    buttonOff: 'Turn me off!',
+    split: 'Split Horns',
+    brightness: 'Brightness'
+  }
+}
 
 const Dashboard = () => {
   const [error, setError] = useState<boolean>(false)
-
+  const [selectedColor, setSelectedColor] = useState<string>('rgb(255, 105, 101)')
   // useEffect(() => {
   //   apiReq(ASTRO_URL, 'POST')
   //     .then((data) => console.warn(data.status))
@@ -115,9 +122,12 @@ const Dashboard = () => {
       .catch((error) => console.warn(error))
   }
 
-  const changeColor = () => {
+  const changeColor = (swatch: string) => {
     apiReq(ASTRO_URL, 'POST', { effect: 'noise', colour })
-      .then((data) => console.warn(data.status))
+      .then((data) => {
+        setSelectedColor(swatch)
+        console.warn(data.status)
+      })
       .catch((error) => console.warn(error))
   }
 
@@ -130,24 +140,24 @@ const Dashboard = () => {
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
         <Text style={styles.headline}>Astro Light</Text>
-        <Button onPress={lightOn} text='Turn me on!' />
-        <Button onPress={lightOn} text='Turn me off!' type='secondary' />
+        <Button onPress={lightOn} text={copy.dashboard.buttonOn} />
+        <Button
+          onPress={lightOff}
+          text={copy.dashboard.buttonOff}
+          type="secondary"
+        />
         <View style={styles.swatchContainer}>
           {swatches.map((swatch, i) => (
-            <Pressable
+            <Swatch
+              selected={selectedColor === swatch.color}
               key={i}
-              style={styles.swatch}
-              onPress={changeColor}
-              android_ripple={{
-                radius: 30,
-                color: '#123',
-                borderless: false
-              }}
+              onPress={() => changeColor(swatch.color)}
+              backgroundColor={swatch.color}
             />
           ))}
         </View>
         <View style={styles.switchContainer}>
-          <Text style={styles.display}>Split Horns</Text>
+          <Text style={styles.display}>{copy.dashboard.split}</Text>
           <Switch
             trackColor={{ false: '#767577', true: colors.brand }}
             thumbColor={true ? '#fff' : '#f4f3f4'}
@@ -158,7 +168,7 @@ const Dashboard = () => {
         </View>
 
         <View style={styles.switchContainer}>
-          <Text style={styles.display}>Brightness</Text>
+          <Text style={styles.display}>{copy.dashboard.brightness}</Text>
           <Slider
             style={{ width: 200, height: 40 }}
             minimumValue={0}
@@ -193,41 +203,12 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginBottom: 24
   },
-  button: {
-    alignItems: 'center',
-    borderRadius: 30,
-    marginTop: 16,
-    paddingHorizontal: 24,
-    paddingVertical: 16
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 24,
-    fontWeight: '700'
-  },
-  buttonOffText: {
-    color: colors.brand
-  },
-  buttonOn: {
-    backgroundColor: 'rgba(255, 141, 0, 1.00)'
-  },
-  buttonOff: {
-    borderColor: colors.brand,
-    borderWidth: 2
-  },
   swatchContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     marginVertical: 24,
     marginBottom: 32
-  },
-  swatch: {
-    backgroundColor: colors.brand,
-    borderRadius: 16,
-    height: 90,
-    marginVertical: 4,
-    width: '23%'
   },
   switchContainer: {
     flexDirection: 'row',

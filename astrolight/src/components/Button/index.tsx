@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   secondary: {
     borderColor: colors.brand,
-    borderWidth: 2
+    borderWidth: 4
   },
   text: {
     color: '#fff',
