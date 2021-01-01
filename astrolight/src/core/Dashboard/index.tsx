@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   StyleSheet,
   ScrollView,
   View,
   Pressable,
   Text,
-  Switch
+  Switch,
+  RefreshControl
 } from 'react-native'
 import Slider from '@react-native-community/slider'
 
@@ -43,7 +44,58 @@ const swatches: Swatch[] = [
   }
 ]
 
+interface Colour {
+  main: {
+    dyn: {
+      r: boolean,
+      b: boolean,
+      g: boolean,
+      w: boolean
+    },
+    stat: {
+      r: number,
+      b: number,
+      g: number,
+      w: number
+    }
+  }
+}
+
+
+const colour: Colour = {
+  main: {
+    dyn: {
+      r: true,
+      b: true,
+      g: true,
+      w: true
+    },
+    stat: {
+      r: 0,
+      b: 65,
+      g: 43,
+      w: 0
+    }
+  }
+}
+
+
+
 const Dashboard = () => {
+  const [error, setError] = useState<boolean>(false)
+
+  useEffect(() => {
+    apiReq(ASTRO_URL, 'POST')
+      .then((data) => console.warn(data.status))
+      .catch((error) => setError(true))
+  })
+
+  const onRefresh = () => {
+    apiReq(ASTRO_URL, 'POST')
+      .then((data) => console.warn(data.status))
+      .catch((error) => setError(true))
+  }
+
   const lightOn = () => {
     apiReq(ASTRO_URL, 'POST', { effect: 'noise' })
       .then((data) => console.warn(data.status))
@@ -56,12 +108,32 @@ const Dashboard = () => {
       .catch((error) => console.warn(error))
   }
 
+  const adjustBrightness = (value: number) => {
+    const brightness = Math.round(value)
+
+    apiReq(ASTRO_URL, 'POST', { brightness })
+      .then((data) => console.warn(data.status))
+      .catch((error) => console.warn(error))
+  }
+
+  const changeColor = () => {
+    apiReq(ASTRO_URL, 'POST', { colour })
+      .then((data) => console.warn(data.status))
+      .catch((error) => console.warn(error))
+  }
+
   return (
     <>
       <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={error} onRefresh={onRefresh} />
+        }
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
         <Text style={styles.headline}>Astro Light</Text>
+        {error && (
+          <Text style={styles.headline}>Can't connect to the astro light!</Text>
+        )}
         <Pressable
           style={[styles.button, styles.buttonOn]}
           onPress={lightOn}
@@ -81,7 +153,7 @@ const Dashboard = () => {
             <Pressable
               key={i}
               style={styles.swatch}
-              onPress={() => console.warn('purple')}
+              onPress={changeColor}
               android_ripple={{
                 radius: 30,
                 color: '#123',
@@ -106,10 +178,10 @@ const Dashboard = () => {
           <Slider
             style={{ width: 200, height: 40 }}
             minimumValue={0}
-            maximumValue={1}
+            maximumValue={50}
             minimumTrackTintColor={colors.brand}
             maximumTrackTintColor="#767577"
-            onSlidingComplete={(v) => console.warn('done!', v)}
+            onSlidingComplete={adjustBrightness}
           />
         </View>
       </ScrollView>
