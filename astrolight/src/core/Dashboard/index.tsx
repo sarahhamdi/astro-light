@@ -13,35 +13,16 @@ import { apiReq, ASTRO_URL } from '../../helpers/api'
 import { colors } from '../../helpers/styles'
 import Button from '../../components/Button'
 import Swatch from '../../components/Swatch'
-interface SwatchType {
-  color: string
-}
 
-const swatches: SwatchType[] = [
-  {
-    color: 'rgb(255, 105, 101)'
-  },
-  {
-    color: 'rgb(81, 81, 81)'
-  },
-  {
-    color: 'rgb(255, 196, 56)'
-  },
-  {
-    color: 'rgb(153, 205, 54)'
-  },
-  {
-    color: 'rgb(247, 138, 224)'
-  },
-  {
-    color: 'rgb(216, 223, 215)'
-  },
-  {
-    color: 'rgb(101, 226, 255)'
-  },
-  {
-    color: colors.brand
-  }
+const swatches: string[] = [
+  'rgb(255, 105, 101)',
+  'rgb(81, 81, 81)',
+  'rgb(255, 196, 56)',
+  'rgb(153, 205, 54)',
+  'rgb(247, 138, 224)',
+  'rgb(216, 223, 215)',
+  'rgb(101, 226, 255)',
+  colors.brand
 ]
 
 interface Colour {
@@ -90,7 +71,9 @@ const copy = {
 
 const Dashboard = () => {
   const [error, setError] = useState<boolean>(false)
-  const [selectedColor, setSelectedColor] = useState<string>('rgb(255, 105, 101)')
+  const [selectedColor, setSelectedColor] = useState<string>(
+    'rgb(255, 105, 101)'
+  )
   // useEffect(() => {
   //   apiReq(ASTRO_URL, 'POST')
   //     .then((data) => console.warn(data.status))
@@ -149,10 +132,10 @@ const Dashboard = () => {
         <View style={styles.swatchContainer}>
           {swatches.map((swatch, i) => (
             <Swatch
-              selected={selectedColor === swatch.color}
+              selected={selectedColor === swatch}
               key={i}
-              onPress={() => changeColor(swatch.color)}
-              backgroundColor={swatch.color}
+              onPress={() => changeColor(swatch)}
+              backgroundColor={swatch}
             />
           ))}
         </View>
