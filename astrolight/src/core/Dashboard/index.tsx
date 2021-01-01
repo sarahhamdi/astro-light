@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
   StyleSheet,
   ScrollView,
@@ -12,6 +12,7 @@ import Slider from '@react-native-community/slider'
 
 import { apiReq, ASTRO_URL } from '../../helpers/api'
 import { colors } from '../../helpers/styles'
+import Button from '../../components/Button'
 
 interface Swatch {
   color: string
@@ -61,22 +62,24 @@ interface Colour {
   }
 }
 
+// save this cool colour!
 const colour: Colour = {
   main: {
     dyn: {
-      r: true,
-      b: true,
+      r: false,
+      b: false,
       g: true,
-      w: true
+      w: false
     },
     stat: {
-      r: 0,
-      b: 65,
-      g: 43,
+      r: 255,
+      b: 105,
+      g: 101,
       w: 0
     }
   }
 }
+
 
 const Dashboard = () => {
   const [error, setError] = useState<boolean>(false)
@@ -127,20 +130,8 @@ const Dashboard = () => {
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
         <Text style={styles.headline}>Astro Light</Text>
-        <Pressable
-          style={[styles.button, styles.buttonOn]}
-          onPress={lightOn}
-          android_ripple={{ radius: 30, color: '#123', borderless: false }}>
-          <Text style={[styles.buttonText]}>Turn me on!</Text>
-        </Pressable>
-        <Pressable
-          style={[styles.button, styles.buttonOff]}
-          onPress={lightOff}
-          android_ripple={{ radius: 30, color: '#123', borderless: false }}>
-          <Text style={[styles.buttonText, styles.buttonOffText]}>
-            Turn me off!
-          </Text>
-        </Pressable>
+        <Button onPress={lightOn} text='Turn me on!' />
+        <Button onPress={lightOn} text='Turn me off!' type='secondary' />
         <View style={styles.swatchContainer}>
           {swatches.map((swatch, i) => (
             <Pressable
@@ -243,27 +234,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between'
   }
-  // toastContainer: {
-  //   backgroundColor: 'rgba(255, 105, 101, 1.00)',
-  //   paddingVertical: 12,
-  //   paddingHorizontal: 20,
-  //   borderRadius: 8,
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   position: 'absolute',
-  //   width: '100%',
-  //   bottom: 0,
-  //   zIndex: 1,
-  // },
-  // toast: {
-  //   color: '#fff',
-  //   fontSize: 16,
-  // },
-  // toastClose: {
-  //   color: '#fff',
-  //   fontSize: 16,
-  //   fontWeight: 'bold',
-  // }
 })
 
 export default Dashboard

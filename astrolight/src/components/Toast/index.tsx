@@ -12,16 +12,14 @@ interface Props {
   onPress: () => void
 }
 
-const Toast = ({ onPress }: Props) => {
-  return (
-    <View style={styles.toastContainer}>
-      <Text style={styles.toastText}>{copy.toast.text}</Text>
-      <Text style={styles.toastClose} onPress={onPress}>
-        {copy.toast.close}
-      </Text>
-    </View>
-  )
-}
+const Toast = ({ onPress }: Props) => (
+  <View style={styles.toastContainer}>
+    <Text style={styles.toastText}>{copy.toast.text}</Text>
+    <Text style={styles.toastClose} onPress={onPress}>
+      {copy.toast.close}
+    </Text>
+  </View>
+)
 
 const styles = StyleSheet.create({
   toastContainer: {
