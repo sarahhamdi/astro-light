@@ -11,7 +11,7 @@
 - [ ] set up a nav
 - [ ] choose a colour picker
 - [ ] set up profiles (morning, eve, etc)
-- [ ] error handling with toaster
+- [x] error handling with toaster
 - [ ] async storage
 - [ ] dark / light mode using `usecolorscheme` hook (maybe)
 

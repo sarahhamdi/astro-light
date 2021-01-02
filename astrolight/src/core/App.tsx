@@ -17,8 +17,8 @@ const App = () => {
     <>
       <StatusBar barStyle="light-content" />
       <SafeAreaView>
-        <Dashboard />
-        {showToast && <Toast onPress={() => setShowToast(false)}/>}
+        <Dashboard handleError={() => setShowToast(true)}/>
+        {showToast && <Toast onPress={() => setShowToast(false)} />}
       </SafeAreaView>
     </>
   )

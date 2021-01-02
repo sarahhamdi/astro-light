@@ -5,25 +5,13 @@ import {
   View,
   Text,
   Switch,
-  RefreshControl
 } from 'react-native'
 import Slider from '@react-native-community/slider'
 
 import { apiReq, ASTRO_URL } from '../../helpers/api'
-import { colors } from '../../helpers/styles'
+import { colors, swatches } from '../../helpers/styles'
 import Button from '../../components/Button'
 import Swatch from '../../components/Swatch'
-
-const swatches: string[] = [
-  'rgb(255, 105, 101)',
-  'rgb(81, 81, 81)',
-  'rgb(255, 196, 56)',
-  'rgb(153, 205, 54)',
-  'rgb(247, 138, 224)',
-  'rgb(216, 223, 215)',
-  'rgb(101, 226, 255)',
-  colors.brand
-]
 
 interface Colour {
   main: {
@@ -69,40 +57,37 @@ const copy = {
   }
 }
 
-const Dashboard = () => {
-  const [error, setError] = useState<boolean>(false)
+interface Props {
+  handleError: () => void
+}
+
+const Dashboard = ({ handleError }: Props) => {
   const [selectedColor, setSelectedColor] = useState<string>(
     'rgb(255, 105, 101)'
   )
   // useEffect(() => {
   //   apiReq(ASTRO_URL, 'POST')
   //     .then((data) => console.warn(data.status))
-  //     .catch((error) => setError(true))
+  //     .catch((error) => handleError(true))
   // })
-
-  const onRefresh = () => {
-    apiReq(ASTRO_URL, 'POST')
-      .then((data) => console.warn(data.status))
-      .catch((error) => setError(true))
-  }
 
   const lightOn = () => {
     apiReq(ASTRO_URL, 'POST', { effect: 'noise' })
       .then((data) => console.warn(data.status))
-      .catch((error) => console.warn(error))
+      .catch(() => handleError())
   }
 
   const lightOff = () => {
     apiReq(ASTRO_URL, 'POST', { effect: 'off' })
       .then((data) => console.warn(data.status))
-      .catch((error) => console.warn(error))
+      .catch(() => handleError())
   }
 
   const adjustBrightness = (value: number) => {
     const brightness = Math.round(value)
     apiReq(ASTRO_URL, 'POST', { effect: 'noise', brightness })
       .then((data) => console.warn(data.status))
-      .catch((error) => console.warn(error))
+      .catch(() => handleError())
   }
 
   const changeColor = (swatch: string) => {
@@ -111,15 +96,12 @@ const Dashboard = () => {
         setSelectedColor(swatch)
         console.warn(data.status)
       })
-      .catch((error) => console.warn(error))
+      .catch(() => handleError())
   }
 
   return (
     <>
       <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={error} onRefresh={onRefresh} />
-        }
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
         <Text style={styles.headline}>Astro Light</Text>
