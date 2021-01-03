@@ -1,20 +1,31 @@
 export const colors = {
   brand: 'rgba(255, 141, 0, 1.00)',
   white: '#fff',
+  black: 'rgba(58, 58, 58, 1.00)'
 }
 
 export const swatches: string[] = [
-  'rgb(255, 105, 101)',
-  'rgb(81, 81, 81)',
-  'rgb(255, 196, 56)',
-  'rgb(153, 205, 54)',
-  'rgb(247, 138, 224)',
-  'rgb(216, 223, 215)',
-  'rgb(101, 226, 255)',
-  colors.brand
+  'rgba(255, 192, 194, 1.00)',
+  'rgba(255, 238, 197, 1.00)',
+  'rgba(192, 255, 197, 1.00)',
+  'rgba(140, 241, 255, 1.00)',
+  'rgba(240, 211, 255, 1.00)',
+  'rgba(255, 204, 255, 1.00)',
+  'rgba(211, 226, 255, 1.00)',
+  'rgba(235, 255, 160, 1.00)',
+
 ]
 
 export const theme = {
   borderRadius: 30,
-  borderRadiusSmall: 16
+  boxShadow: {
+    shadowColor: "rgba(0,0,0,0.6)",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 15,
+    elevation: 4,
+  }
 }

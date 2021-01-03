@@ -19,7 +19,7 @@ const Swatch = ({
       styles.swatch,
       {
         backgroundColor,
-        borderWidth: selected ? 4 : 0
+        borderWidth: selected ? 2 : 0
       }
     ]}
     onPress={onPress}
@@ -33,11 +33,11 @@ const Swatch = ({
 
 const styles = StyleSheet.create({
   swatch: {
-    borderRadius: theme.borderRadiusSmall,
-    height: 90,
-    marginVertical: 4,
+    borderRadius: theme.borderRadius,
+    height: 80,
+    marginVertical: 8,
     width: '23%',
-    borderColor: 'rgba(45, 50, 59, 1.00)'
+    borderColor: colors.black,
   }
 })
 

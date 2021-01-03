@@ -5,6 +5,7 @@ import {
   View,
   Text,
   Switch,
+  Image,
 } from 'react-native'
 import Slider from '@react-native-community/slider'
 
@@ -63,13 +64,8 @@ interface Props {
 
 const Dashboard = ({ handleError }: Props) => {
   const [selectedColor, setSelectedColor] = useState<string>(
-    'rgb(255, 105, 101)'
+    'rgba(255, 238, 197, 1.00)'
   )
-  // useEffect(() => {
-  //   apiReq(ASTRO_URL, 'POST')
-  //     .then((data) => console.warn(data.status))
-  //     .catch((error) => handleError(true))
-  // })
 
   const lightOn = () => {
     apiReq(ASTRO_URL, 'POST', { effect: 'noise' })
@@ -104,14 +100,15 @@ const Dashboard = ({ handleError }: Props) => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
-        <Text style={styles.headline}>Astro Light</Text>
+        <Text style={styles.headline}>astrolight v1.0</Text>
         <Button onPress={lightOn} text={copy.dashboard.buttonOn} />
         <Button
           onPress={lightOff}
           text={copy.dashboard.buttonOff}
           type="secondary"
         />
-        <View style={styles.swatchContainer}>
+
+        <View style={styles.row}>
           {swatches.map((swatch, i) => (
             <Swatch
               selected={selectedColor === swatch}
@@ -121,10 +118,11 @@ const Dashboard = ({ handleError }: Props) => {
             />
           ))}
         </View>
-        <View style={styles.switchContainer}>
+
+        <View style={styles.row}>
           <Text style={styles.display}>{copy.dashboard.split}</Text>
           <Switch
-            trackColor={{ false: '#767577', true: colors.brand }}
+            trackColor={{ false: '#767577', true: colors.black }}
             thumbColor={true ? '#fff' : '#f4f3f4'}
             ios_backgroundColor="#3e3e3e"
             onValueChange={() => console.warn('switch!')}
@@ -132,14 +130,14 @@ const Dashboard = ({ handleError }: Props) => {
           />
         </View>
 
-        <View style={styles.switchContainer}>
+        <View style={styles.row}>
           <Text style={styles.display}>{copy.dashboard.brightness}</Text>
           <Slider
             style={{ width: 200, height: 40 }}
             minimumValue={0}
             maximumValue={50}
-            minimumTrackTintColor={colors.brand}
-            maximumTrackTintColor="#767577"
+            minimumTrackTintColor={colors.black}
+            maximumTrackTintColor="#dfdfdf"
             onSlidingComplete={adjustBrightness}
           />
         </View>
@@ -150,35 +148,25 @@ const Dashboard = ({ handleError }: Props) => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     minHeight: '100%',
-    paddingHorizontal: 16,
-    paddingVertical: 28
+    paddingHorizontal: 24,
+    paddingVertical: 16
   },
   headline: {
-    color: 'rgba(45, 50, 59, 1.00)',
+    color: colors.black,
     fontSize: 32,
-    fontWeight: '700',
-    marginBottom: 24,
-    textAlign: 'center'
+    marginBottom: 16,
   },
   display: {
-    color: colors.brand,
-    fontSize: 24,
-    fontWeight: '700',
-    marginBottom: 24
+    color: colors.black,
+    fontSize: 18,
   },
-  swatchContainer: {
+  row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    marginVertical: 24,
-    marginBottom: 32
-  },
-  switchContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between'
+    marginTop: 32,
   }
 })
 
