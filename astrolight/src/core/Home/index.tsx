@@ -77,43 +77,26 @@ const Dashboard = ({ handleError }: Props) => {
 
   const lightOn = () => {
     apiReq(ASTRO_URL, 'POST', { effect: 'noise' })
-      .then((data) => {
-        setIsLightOn(true)
-        console.warn(data.status)
-      })
-      .catch(() => {
-        // TODO: remove this when connected
-        setIsLightOn(true)
-        handleError()
-      })
+      .then(() => setIsLightOn(true))
+      .catch(() => handleError())
   }
 
   const lightOff = () => {
     apiReq(ASTRO_URL, 'POST', { effect: 'off' })
-      .then((data) => {
-        setIsLightOn(false)
-        console.warn(data.status)
-      })
-      .catch(() => {
-        // TODO: remove this when connected
-        setIsLightOn(false)
-        handleError()
-      })
+      .then(() => setIsLightOn(false))
+      .catch(() => handleError())
   }
 
   const adjustBrightness = (value: number) => {
     const brightness = Math.round(value)
-    apiReq(ASTRO_URL, 'POST', { effect: 'noise', brightness })
-      .then((data) => console.warn(data.status))
-      .catch(() => handleError())
+    apiReq(ASTRO_URL, 'POST', { effect: 'noise', brightness }).catch(() =>
+      handleError()
+    )
   }
 
   const changeColor = (swatch: string) => {
     apiReq(ASTRO_URL, 'POST', { effect: 'noise', colour })
-      .then((data) => {
-        setSelectedColor(swatch)
-        console.warn(data.status)
-      })
+      .then(() => setSelectedColor(swatch))
       .catch(() => handleError())
   }
 
@@ -122,7 +105,9 @@ const Dashboard = ({ handleError }: Props) => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
-        <Text bold style={styles.headline}>astrolight</Text>
+        <Text bold center style={styles.headline}>
+          astrolight
+        </Text>
 
         {!isLightOn && (
           <Quotation
@@ -210,11 +195,10 @@ const styles = StyleSheet.create({
   },
   headline: {
     fontSize: 36,
-    marginBottom: 16,
-    textAlign: 'center',
+    marginBottom: 16
   },
   display: {
-    fontSize: 18,
+    fontSize: 18
   },
   row: {
     flexDirection: 'row',

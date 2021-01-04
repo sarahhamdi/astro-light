@@ -4,12 +4,29 @@ import { StyleSheet, Text, View } from 'react-native'
 
 interface Props {
   bold?: boolean
-  style?: {}
+  center?: boolean
   children: any
+  right?: boolean
+  style?: {}
 }
 
-const AstroText = ({ bold, children, style, ...rest }: Props) => (
-  <Text style={[styles.text, bold && styles.bold, style]} {...rest}>
+const AstroText = ({
+  bold,
+  center,
+  children,
+  right,
+  style,
+  ...rest
+}: Props) => (
+  <Text
+    style={[
+      styles.text,
+      bold && styles.bold,
+      center && styles.center,
+      right && styles.right,
+      style
+    ]}
+    {...rest}>
     {children}
   </Text>
 )
@@ -21,6 +38,12 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontWeight: '700'
+  },
+  right: {
+    textAlign: 'right'
+  },
+  center: {
+    textAlign: 'center'
   }
 })
 

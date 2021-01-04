@@ -27,7 +27,7 @@ const ButtonGroup = ({ options }: Props) => {
               // backgroundColor: colors.black,
             }
           ]}>
-          <Text style={styles.text}>
+          <Text center style={styles.text}>
             {text}
           </Text>
         </Pressable>
@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    textAlign: 'center'
   },
   activeText: {
     color: colors.white
