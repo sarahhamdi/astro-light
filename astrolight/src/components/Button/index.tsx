@@ -29,19 +29,19 @@ const styles = StyleSheet.create({
     paddingVertical: 16
   },
   primary: {
-    backgroundColor: colors.white,
-    ...theme.boxShadow
-  },
-  secondary: {
     backgroundColor: colors.black,
     ...theme.boxShadow
   },
+  secondary: {
+    backgroundColor: colors.white,
+    ...theme.boxShadow
+  },
   text: {
-    color: colors.black,
+    color: colors.white,
     fontSize: 18,
   },
   secondaryText: {
-    color: colors.white
+    color: colors.black
   }
 })
 

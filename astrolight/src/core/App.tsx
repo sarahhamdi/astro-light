@@ -5,13 +5,7 @@ import Dashboard from './Dashboard'
 import Toast from '../components/Toast'
 
 const App = () => {
-  const [showToast, setShowToast] = useState<boolean>(true)
-
-  useEffect(() => {
-    if (showToast) {
-      setTimeout(() => setShowToast(false), 3000)
-    }
-  }, [showToast, setShowToast])
+  const [showToast, setShowToast] = useState<boolean>(false)
 
   return (
     <>

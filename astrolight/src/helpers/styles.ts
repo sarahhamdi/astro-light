@@ -1,7 +1,8 @@
 export const colors = {
   brand: 'rgba(255, 141, 0, 1.00)',
   white: '#fff',
-  black: 'rgba(58, 58, 58, 1.00)'
+  black: 'rgba(58, 58, 58, 1.00)',
+  grey: '#dfdfdf'
 }
 
 export const swatches: string[] = [
@@ -26,6 +27,10 @@ export const theme = {
     },
     shadowOpacity: 0.23,
     shadowRadius: 15,
-    elevation: 4,
+    elevation: 5,
+  },
+  fontFamily: {
+    ios: 'Avenir',
+    android: 'monospace'
   }
 }
