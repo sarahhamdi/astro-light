@@ -1,7 +1,8 @@
 import React from 'react'
-import { StyleSheet, Pressable, Text, View } from 'react-native'
+import { StyleSheet, Pressable, View } from 'react-native'
 
 import { colors, theme } from '../../helpers/styles'
+import Text from '../Text'
 
 interface Button {
   text: string
@@ -17,6 +18,7 @@ const ButtonGroup = ({ options }: Props) => {
     <View style={styles.buttonGroup}>
       {options.map(({ text, onPress }, i) => (
         <Pressable
+          key={i}
           onPress={onPress}
           style={[
             styles.button,
@@ -25,7 +27,7 @@ const ButtonGroup = ({ options }: Props) => {
               // backgroundColor: colors.black,
             }
           ]}>
-          <Text key={i} style={styles.text}>
+          <Text style={styles.text}>
             {text}
           </Text>
         </Pressable>
@@ -55,7 +57,6 @@ const styles = StyleSheet.create({
     ...theme.boxShadow
   },
   text: {
-    color: colors.black,
     fontSize: 18,
     textAlign: 'center'
   },

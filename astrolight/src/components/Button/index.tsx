@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet, Pressable, Text } from 'react-native'
+import { StyleSheet, Pressable } from 'react-native'
 
 import { colors, theme } from '../../helpers/styles'
-
+import Text from '../Text'
 interface Props {
   onPress: () => void
   text: string

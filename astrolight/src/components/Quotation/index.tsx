@@ -1,7 +1,7 @@
 import React from 'react'
 import { colors, theme } from '../../helpers/styles'
-import { StyleSheet, Text, View } from 'react-native'
-
+import { StyleSheet, View } from 'react-native'
+import Text from '../Text'
 interface Props {
   text: string
   attrib: string
@@ -10,7 +10,7 @@ interface Props {
 const Quotation = ({ text, attrib }: Props) => (
   <View style={styles.container}>
     <Text style={styles.text}>{text}</Text>
-    <Text style={styles.attrib}>—{attrib}</Text>
+    <Text bold>—{attrib}</Text>
   </View>
 )
 
@@ -22,14 +22,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     marginBottom: 8,
-    color: colors.black,
-    fontFamily: theme.fontFamily.ios
   },
-  attrib: {
-    fontWeight: '700',
-    color: colors.black,
-    fontFamily: theme.fontFamily.ios
-  }
 })
 
 export default Quotation

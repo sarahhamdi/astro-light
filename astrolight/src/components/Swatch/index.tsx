@@ -24,8 +24,8 @@ const Swatch = ({
     ]}
     onPress={onPress}
     android_ripple={{
-      radius: 30,
-      color: '#123',
+      radius: 50,
+      color: colors.black,
       borderless: false
     }}
   />

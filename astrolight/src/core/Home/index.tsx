@@ -3,7 +3,6 @@ import {
   StyleSheet,
   ScrollView,
   View,
-  Text,
   Switch,
   Image,
   ImageBackground
@@ -16,6 +15,7 @@ import Button from '../../components/Button'
 import Swatch from '../../components/Swatch'
 import ButtonGroup from '../../components/ButtonGroup'
 import Quotation from '../../components/Quotation'
+import Text from '../../components/Text'
 
 interface Colour {
   main: {
@@ -122,7 +122,7 @@ const Dashboard = ({ handleError }: Props) => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
-        <Text style={styles.headline}>astrolight</Text>
+        <Text bold style={styles.headline}>astrolight</Text>
 
         {!isLightOn && (
           <Quotation
@@ -209,17 +209,12 @@ const styles = StyleSheet.create({
     paddingVertical: 16
   },
   headline: {
-    color: colors.black,
     fontSize: 36,
     marginBottom: 16,
     textAlign: 'center',
-    fontWeight: '700',
-    fontFamily: theme.fontFamily.ios
   },
   display: {
-    color: colors.black,
     fontSize: 18,
-    fontFamily: theme.fontFamily.ios
   },
   row: {
     flexDirection: 'row',
