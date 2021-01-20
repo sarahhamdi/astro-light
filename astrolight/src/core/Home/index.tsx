@@ -4,67 +4,13 @@ import Slider from '@react-native-community/slider'
 
 import { apiReq, ASTRO_URL } from '../../helpers/api'
 import { colors, swatches } from '../../helpers/styles'
+import { getColor } from '../../helpers/colorFns'
+
 import Button from '../../components/Button'
 import Swatch from '../../components/Swatch'
 import ButtonGroup from '../../components/ButtonGroup'
 import Quotation from '../../components/Quotation'
 import Text from '../../components/Text'
-
-interface Color {
-  main: {
-    dyn: {
-      r: boolean
-      b: boolean
-      g: boolean
-      w: boolean
-    }
-    stat: {
-      r: number
-      b: number
-      g: number
-      w: number
-    }
-  }
-}
-
-interface StatType {
-  r: number
-  b: number
-  g: number
-  w: number
-}
-
-const color = (rgba: string): Color => {
-  const { r, g, b, w } = getColor(rgba)
-
-  return {
-    main: {
-      dyn: {
-        r: false,
-        b: false,
-        g: false,
-        w: false
-      },
-      stat: {
-        r,
-        b,
-        g,
-        w
-      }
-    }
-  }
-}
-
-const getColor = (rgba: string = 'rgba(255, 192, 194, 1.00)'): StatType => {
-  // converts rgba to r g b w
-  let [r, g, b, w] = rgba
-    .replace('rgba(', '') // get rid of rgba text
-    .replace(')', '')
-    .split(', ') // turn to array
-    .map((item) => parseInt(item, 10)) // turn to int
-  w = (1 - w) * 255 // if a = 1, w = 0; if a = 0, w = 255
-  return { r, g, b, w }
-}
 
 const copy = {
   dashboard: {
@@ -109,8 +55,8 @@ const Home = ({ handleError }: Props) => {
   }
 
   const changeColor = (swatch: string) => {
-    const newColor = color(swatch)
-    apiReq(ASTRO_URL, 'POST', { effect: 'noise', colour: newColor })
+    const colour = getColor(swatch)
+    apiReq(ASTRO_URL, 'POST', { effect: 'noise', colour })
       .then(() => setSelectedColor(swatch))
       .catch(() => handleError())
   }

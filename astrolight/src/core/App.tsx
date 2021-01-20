@@ -4,10 +4,17 @@ import { SafeAreaView, StatusBar } from 'react-native'
 import Home from './Home'
 import Toast from '../components/Toast'
 
+const copy = {
+  app: {
+    error: `[ERROR] - Can't connect to astro light`
+  }
+}
+
 const App = () => {
   const [showToast, setShowToast] = useState<boolean>(false)
+
   const handleError = () => {
-    console.error(`[ERROR] - Can't connect to astro light`)
+    console.error(copy.app.error)
     setShowToast(true)
   }
 
