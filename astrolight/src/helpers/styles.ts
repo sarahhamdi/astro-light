@@ -13,24 +13,41 @@ export const swatches: string[] = [
   'rgba(240, 211, 255, 1.00)',
   'rgba(255, 204, 255, 1.00)',
   'rgba(211, 226, 255, 1.00)',
-  'rgba(235, 255, 160, 1.00)',
-
+  'rgba(235, 255, 160, 1.00)'
 ]
 
 export const theme = {
   borderRadius: 30,
   boxShadow: {
-    shadowColor: "rgba(0,0,0,0.6)",
+    shadowColor: 'rgba(0,0,0,0.6)',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.23,
     shadowRadius: 15,
-    elevation: 5,
+    elevation: 5
   },
   fontFamily: {
     ios: 'Avenir',
     android: 'monospace'
   }
 }
+
+// save this cool colour!
+// const colour: Colour = {
+//   main: {
+//     dyn: {
+//       r: false,
+//       b: false,
+//       g: false,
+//       w: false
+//     },
+//     stat: {
+//       r: 255,
+//       b: 105,
+//       g: 101,
+//       w: 0
+//     }
+//   }
+// }

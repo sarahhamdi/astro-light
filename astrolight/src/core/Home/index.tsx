@@ -1,23 +1,16 @@
 import React, { useState } from 'react'
-import {
-  StyleSheet,
-  ScrollView,
-  View,
-  Switch,
-  Image,
-  ImageBackground
-} from 'react-native'
+import { StyleSheet, ScrollView, View, Switch, Image } from 'react-native'
 import Slider from '@react-native-community/slider'
 
 import { apiReq, ASTRO_URL } from '../../helpers/api'
-import { colors, swatches, theme } from '../../helpers/styles'
+import { colors, swatches } from '../../helpers/styles'
 import Button from '../../components/Button'
 import Swatch from '../../components/Swatch'
 import ButtonGroup from '../../components/ButtonGroup'
 import Quotation from '../../components/Quotation'
 import Text from '../../components/Text'
 
-interface Colour {
+interface Color {
   main: {
     dyn: {
       r: boolean
@@ -34,22 +27,43 @@ interface Colour {
   }
 }
 
-// save this cool colour!
-const colour: Colour = {
-  main: {
-    dyn: {
-      r: false,
-      b: false,
-      g: true,
-      w: false
-    },
-    stat: {
-      r: 255,
-      b: 105,
-      g: 101,
-      w: 0
+interface StatType {
+  r: number
+  b: number
+  g: number
+  w: number
+}
+
+const color = (rgba: string): Color => {
+  const { r, g, b, w } = getColor(rgba)
+
+  return {
+    main: {
+      dyn: {
+        r: false,
+        b: false,
+        g: false,
+        w: false
+      },
+      stat: {
+        r,
+        b,
+        g,
+        w
+      }
     }
   }
+}
+
+const getColor = (rgba: string = 'rgba(255, 192, 194, 1.00)'): StatType => {
+  // converts rgba to r g b w
+  let [r, g, b, w] = rgba
+    .replace('rgba(', '') // get rid of rgba text
+    .replace(')', '')
+    .split(', ') // turn to array
+    .map((item) => parseInt(item, 10)) // turn to int
+  w = (1 - w) * 255 // if a = 1, w = 0; if a = 0, w = 255
+  return { r, g, b, w }
 }
 
 const copy = {
@@ -69,8 +83,8 @@ interface Props {
   handleError: () => void
 }
 
-const Dashboard = ({ handleError }: Props) => {
-  const [isLightOn, setIsLightOn] = useState<boolean>(false)
+const Home = ({ handleError }: Props) => {
+  const [isLightOn, setIsLightOn] = useState<boolean>(true)
   const [selectedColor, setSelectedColor] = useState<string>(
     'rgba(255, 238, 197, 1.00)'
   )
@@ -95,7 +109,8 @@ const Dashboard = ({ handleError }: Props) => {
   }
 
   const changeColor = (swatch: string) => {
-    apiReq(ASTRO_URL, 'POST', { effect: 'noise', colour })
+    const newColor = color(swatch)
+    apiReq(ASTRO_URL, 'POST', { effect: 'noise', colour: newColor })
       .then(() => setSelectedColor(swatch))
       .catch(() => handleError())
   }
@@ -117,15 +132,7 @@ const Dashboard = ({ handleError }: Props) => {
         )}
 
         {!isLightOn && (
-          <Image
-            source={require('./day-and-night.gif')}
-            style={{
-              width: '100%',
-              height: 430,
-              alignSelf: 'center',
-              marginBottom: 32
-            }}
-          />
+          <Image source={require('./day-and-night.gif')} style={styles.image} />
         )}
 
         {isLightOn && (
@@ -144,7 +151,7 @@ const Dashboard = ({ handleError }: Props) => {
             <View style={styles.row}>
               <Text style={styles.display}>{copy.dashboard.brightness}</Text>
               <Slider
-                style={{ width: 200, height: 40 }}
+                style={styles.slider}
                 minimumValue={0}
                 maximumValue={50}
                 minimumTrackTintColor={colors.black}
@@ -205,7 +212,14 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     marginTop: 32
-  }
+  },
+  image: {
+    width: '100%',
+    height: 430,
+    alignSelf: 'center',
+    marginBottom: 32
+  },
+  slider: { width: 200, height: 40 }
 })
 
-export default Dashboard
+export default Home

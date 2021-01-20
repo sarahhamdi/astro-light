@@ -7,6 +7,7 @@ export const apiReq = async (
   method: MethodType = 'POST',
   data: {} = {}
 ) => {
+  console.log(`[${method}] - ${url}`)
   const response = await fetch(url, {
     method,
     mode: 'cors',
@@ -16,5 +17,7 @@ export const apiReq = async (
     },
     body: JSON.stringify(data) // body data type must match "Content-Type" header
   })
+  console.log(`[${method}] - ${url}
+    response: ${response}`)
   return response // already returns json, so no need for response.json()
 }

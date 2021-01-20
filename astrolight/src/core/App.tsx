@@ -6,12 +6,16 @@ import Toast from '../components/Toast'
 
 const App = () => {
   const [showToast, setShowToast] = useState<boolean>(false)
+  const handleError = () => {
+    console.error(`[ERROR] - Can't connect to astro light`)
+    setShowToast(true)
+  }
 
   return (
     <>
       <StatusBar barStyle="light-content" />
       <SafeAreaView>
-        <Home handleError={() => setShowToast(true)}/>
+        <Home handleError={handleError} />
         {showToast && <Toast onPress={() => setShowToast(false)} />}
       </SafeAreaView>
     </>
