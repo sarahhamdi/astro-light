@@ -7,6 +7,7 @@ import Text from '../Text'
 interface Button {
   text: string
   onPress: () => void
+  selected?: boolean
 }
 
 interface Props {
@@ -16,7 +17,7 @@ interface Props {
 const ButtonGroup = ({ options }: Props) => {
   return (
     <View style={styles.buttonGroup}>
-      {options.map(({ text, onPress }, i) => (
+      {options.map(({ text, onPress, selected }, i) => (
         <Pressable
           key={i}
           onPress={onPress}
@@ -24,10 +25,15 @@ const ButtonGroup = ({ options }: Props) => {
             styles.button,
             {
               borderRightWidth: i === options.length - 1 ? 0 : 1,
-              // backgroundColor: colors.black,
+              backgroundColor: selected ? colors.black : '#fff'
             }
           ]}>
-          <Text center style={styles.text}>
+          <Text
+            center
+            style={[
+              styles.text,
+              { color: selected ? colors.white : colors.black }
+            ]}>
             {text}
           </Text>
         </Pressable>
@@ -57,7 +63,7 @@ const styles = StyleSheet.create({
     ...theme.boxShadow
   },
   text: {
-    fontSize: 18,
+    fontSize: 18
   },
   activeText: {
     color: colors.white

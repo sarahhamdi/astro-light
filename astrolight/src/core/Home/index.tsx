@@ -31,6 +31,7 @@ interface Props {
 
 const Home = ({ handleError }: Props) => {
   const [isLightOn, setIsLightOn] = useState<boolean>(true)
+  const [isPulsing, setIsPulsing] = useState<boolean>(true)
   const [selectedColor, setSelectedColor] = useState<string>(
     'rgba(255, 238, 197, 1.00)'
   )
@@ -62,6 +63,24 @@ const Home = ({ handleError }: Props) => {
     apiReq(ASTRO_URL, 'POST', { effect: 'noise', colour }, 'change color')
       .then(() => setSelectedColor(swatch))
       .catch(() => handleError())
+  }
+
+  const setPulse = () => {
+    const colour = getColor(selectedColor)
+
+    if (isPulsing) {
+      lightOn()
+      setIsPulsing(false)
+    } else {
+      apiReq(
+        ASTRO_URL,
+        'POST',
+        { effect: 'pulse', colour, b_pulse_l: 20, b_pulse_u: 255 },
+        'set pulse'
+      )
+        .then(() => setIsPulsing(true))
+        .catch(() => handleError())
+    }
   }
 
   return (
@@ -123,7 +142,7 @@ const Home = ({ handleError }: Props) => {
             <View style={{ marginTop: 32 }}>
               <ButtonGroup
                 options={[
-                  { text: 'Pulse', onPress: () => console.warn('pulse!') },
+                  { text: 'Pulse', onPress: setPulse, selected: isPulsing },
                   { text: 'Clockwise', onPress: () => console.warn('clock!') }
                 ]}
               />
