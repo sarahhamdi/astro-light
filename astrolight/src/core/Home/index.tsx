@@ -36,27 +36,30 @@ const Home = ({ handleError }: Props) => {
   )
 
   const lightOn = () => {
-    apiReq(ASTRO_URL, 'POST', { effect: 'noise' })
+    apiReq(ASTRO_URL, 'POST', { effect: 'noise' }, 'light on')
       .then(() => setIsLightOn(true))
       .catch(() => handleError())
   }
 
   const lightOff = () => {
-    apiReq(ASTRO_URL, 'POST', { effect: 'off' })
+    apiReq(ASTRO_URL, 'POST', { effect: 'off' }, 'light off')
       .then(() => setIsLightOn(false))
       .catch(() => handleError())
   }
 
   const adjustBrightness = (value: number) => {
     const brightness = Math.round(value)
-    apiReq(ASTRO_URL, 'POST', { effect: 'noise', brightness }).catch(() =>
-      handleError()
-    )
+    apiReq(
+      ASTRO_URL,
+      'POST',
+      { effect: 'noise', brightness },
+      'brightness'
+    ).catch(() => handleError())
   }
 
   const changeColor = (swatch: string) => {
     const colour = getColor(swatch)
-    apiReq(ASTRO_URL, 'POST', { effect: 'noise', colour })
+    apiReq(ASTRO_URL, 'POST', { effect: 'noise', colour }, 'change color')
       .then(() => setSelectedColor(swatch))
       .catch(() => handleError())
   }

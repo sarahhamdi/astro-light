@@ -5,9 +5,10 @@ type MethodType = 'POST' | 'GET' | 'PATCH' | 'DELETE'
 export const apiReq = async (
   url: string,
   method: MethodType,
-  data: {} = {}
+  data: {} = {},
+  reqName: string
 ) => {
-  console.log(`[${method}] - ${url}`)
+  console.log(`[${method}] - [${reqName}] - ${url}`)
 
   const response = await fetch(url, {
     method,
