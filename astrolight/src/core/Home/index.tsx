@@ -2,15 +2,11 @@ import React, { useState } from 'react'
 import { StyleSheet, ScrollView, View, Switch, Image } from 'react-native'
 import Slider from '@react-native-community/slider'
 
-import { apiReq, ASTRO_URL } from '../../helpers/api'
-import { colors, swatches } from '../../helpers/styles'
-import { getColor } from '../../helpers/colorFns'
+import { Button, ButtonGroup, Quotation, Swatch, Text } from 'components'
 
-import Button from '../../components/Button'
-import Swatch from '../../components/Swatch'
-import ButtonGroup from '../../components/ButtonGroup'
-import Quotation from '../../components/Quotation'
-import Text from '../../components/Text'
+import { apiReq, ASTRO_URL } from 'helpers/api'
+import { colors, swatches } from 'helpers/styles'
+import { getColor } from 'helpers/colorFns'
 
 const copy = {
   dashboard: {

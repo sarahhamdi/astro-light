@@ -1,6 +1,7 @@
 import React from 'react'
-import { colors, theme } from '../../helpers/styles'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
+
+import { colors, theme } from 'helpers/styles'
 
 interface Props {
   bold?: boolean

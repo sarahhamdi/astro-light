@@ -1,7 +1,8 @@
 import React from 'react'
-import { colors, theme } from '../../helpers/styles'
 import { StyleSheet, View } from 'react-native'
-import Text from '../Text'
+
+import Text from 'components/Text'
+
 interface Props {
   text: string
   attrib: string
@@ -20,8 +21,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    marginBottom: 8,
-  },
+    marginBottom: 8
+  }
 })
 
 export default Quotation

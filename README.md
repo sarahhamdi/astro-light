@@ -7,7 +7,7 @@
 
 ## To Do:
 
-- [ ] figure out why import modules aren't working in `.tsconfig`
+- [x] figure out why import modules aren't working in `.tsconfig`
 - [ ] set up a nav
 - [ ] choose a colour picker
 - [x] dynamically change colour based on swatch

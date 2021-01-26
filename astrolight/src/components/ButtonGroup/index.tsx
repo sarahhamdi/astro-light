@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, Pressable, View } from 'react-native'
 
-import { colors, theme } from '../../helpers/styles'
-import Text from '../Text'
+import Text from 'components/Text'
+import { colors, theme } from 'helpers/styles'
 
 interface Button {
   text: string

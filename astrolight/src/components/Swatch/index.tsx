@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Pressable } from 'react-native'
 
-import { colors, theme } from '../../helpers/styles'
+import { colors, theme } from 'helpers/styles'
 
 interface Props {
   backgroundColor?: string
