@@ -11,7 +11,6 @@
 - [x] dynamically change colour based on swatch
 - [x] error handling with toaster
 - [x] figure out why import modules aren't working in `.tsconfig`
-
 - [ ] add some tests
 - [ ] async storage
 - [ ] choose a colour picker
