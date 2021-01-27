@@ -17,6 +17,7 @@
 - [ ] async storage
 - [ ] dark / light mode using `usecolorscheme` hook (maybe)
 - [ ] add some tests
+- [ ] enable github actions
 
 ## API docs
 
