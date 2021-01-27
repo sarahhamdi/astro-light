@@ -18,6 +18,7 @@
 - [ ] enable github actions
 - [ ] set up a nav
 - [ ] set up profiles (morning, eve, etc)
+- [ ] add github actions
 
 ## API docs
 
