@@ -16,6 +16,7 @@
 - [x] error handling with toaster
 - [ ] async storage
 - [ ] dark / light mode using `usecolorscheme` hook (maybe)
+- [ ] add some tests
 
 ## API docs
 

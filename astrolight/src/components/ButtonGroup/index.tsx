@@ -17,27 +17,25 @@ interface Props {
 const ButtonGroup = ({ options }: Props) => {
   return (
     <View style={styles.buttonGroup}>
-      {options.map(({ text, onPress, selected }, i) => (
-        <Pressable
-          key={i}
-          onPress={onPress}
-          style={[
-            styles.button,
-            {
-              borderRightWidth: i === options.length - 1 ? 0 : 1,
-              backgroundColor: selected ? colors.black : '#fff'
-            }
-          ]}>
-          <Text
-            center
+      {options.map(({ text, onPress, selected }, i) => {
+        const lastItem = i === options.length - 1
+        return (
+          <Pressable
+            key={i}
+            onPress={onPress}
             style={[
-              styles.text,
-              { color: selected ? colors.white : colors.black }
+              styles.button,
+              selected && styles.activeButton,
+              selected && lastItem && styles.lastItemActive,
+              selected && i === 0 && styles.firstItemActive,
+              lastItem && styles.lastItem
             ]}>
-            {text}
-          </Text>
-        </Pressable>
-      ))}
+            <Text center style={[styles.text, selected && styles.activeText]}>
+              {text}
+            </Text>
+          </Pressable>
+        )
+      })}
     </View>
   )
 }
@@ -56,17 +54,30 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 16,
     borderColor: colors.grey,
-    flex: 1
+    flex: 1,
+    borderRightWidth: 1
   },
-  active: {
+  text: {
+    fontSize: 18,
+    color: colors.black
+  },
+  activeButton: {
     backgroundColor: colors.black,
     ...theme.boxShadow
   },
-  text: {
-    fontSize: 18
-  },
   activeText: {
     color: colors.white
+  },
+  lastItem: {
+    borderRightWidth: 0
+  },
+  firstItemActive: {
+    borderTopLeftRadius: theme.borderRadius,
+    borderBottomLeftRadius: theme.borderRadius
+  },
+  lastItemActive: {
+    borderTopRightRadius: theme.borderRadius,
+    borderBottomRightRadius: theme.borderRadius
   }
 })
 

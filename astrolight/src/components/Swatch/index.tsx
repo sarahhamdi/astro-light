@@ -15,13 +15,7 @@ const Swatch = ({
   selected
 }: Props) => (
   <Pressable
-    style={[
-      styles.swatch,
-      {
-        backgroundColor,
-        borderWidth: selected ? 2 : 0
-      }
-    ]}
+    style={[styles.swatch, selected && styles.selected, { backgroundColor }]}
     onPress={onPress}
     android_ripple={{
       radius: 50,
@@ -38,6 +32,10 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     width: '23%',
     borderColor: colors.black,
+    borderWidth: 0
+  },
+  selected: {
+    borderWidth: 2
   }
 })
 

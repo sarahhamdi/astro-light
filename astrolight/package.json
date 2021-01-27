@@ -9,7 +9,7 @@
     "ios": "react-native run-ios",
     "ios-clean": "cd ios && pod cache clean --all && pod update --clean-install",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "precommit": "yarn lint && yarn prettier && yarn typescript && yarn test",
+    "precommit": "yarn prettier && yarn lint && yarn typescript && yarn test",
     "prettier": "prettier --write .",
     "restart": "watchman watch-del-all && rm -rf node_modules && yarn install && yarn start --reset-cache",
     "start": "react-native start",

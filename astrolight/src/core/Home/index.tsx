@@ -27,7 +27,7 @@ interface Props {
 
 const Home = ({ handleError }: Props) => {
   const [isLightOn, setIsLightOn] = useState<boolean>(true)
-  const [isPulsing, setIsPulsing] = useState<boolean>(true)
+  const [isPulsing, setIsPulsing] = useState<boolean>(false)
   const [selectedColor, setSelectedColor] = useState<string>(
     'rgba(255, 238, 197, 1.00)'
   )

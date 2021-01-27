@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.white,
-    fontSize: 18,
+    fontSize: 18
   },
   secondaryText: {
     color: colors.black
