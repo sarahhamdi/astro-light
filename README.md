@@ -7,17 +7,18 @@
 
 ## To Do:
 
-- [x] figure out why import modules aren't working in `.tsconfig`
-- [ ] set up a nav
-- [ ] choose a colour picker
+- [x] consolidate colours
 - [x] dynamically change colour based on swatch
-- [ ] consolidate colours
-- [ ] set up profiles (morning, eve, etc)
 - [x] error handling with toaster
-- [ ] async storage
-- [ ] dark / light mode using `usecolorscheme` hook (maybe)
+- [x] figure out why import modules aren't working in `.tsconfig`
+
 - [ ] add some tests
+- [ ] async storage
+- [ ] choose a colour picker
+- [ ] dark / light mode using `usecolorscheme` hook (maybe)
 - [ ] enable github actions
+- [ ] set up a nav
+- [ ] set up profiles (morning, eve, etc)
 
 ## API docs
 
